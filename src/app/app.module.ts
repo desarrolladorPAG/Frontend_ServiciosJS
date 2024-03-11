@@ -7,18 +7,22 @@ import { LoginComponent } from './paginas/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import { MainComponent } from './paginas/main/main.component';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    OAuthModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

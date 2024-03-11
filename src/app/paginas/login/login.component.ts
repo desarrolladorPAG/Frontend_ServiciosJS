@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { LoginService } from 'src/app/servicios/login/login.service';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthGoogleService } from 'src/app/servicios/auth-google/auth-google.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   loading: boolean = false;
 
-  constructor(private fb : FormBuilder, private loginService : LoginService){}
+  constructor(private fb : FormBuilder, private loginService : LoginService, private authGoogleService : AuthGoogleService){}
 
   ngOnInit(): void {
     
@@ -88,6 +89,10 @@ export class LoginComponent implements OnInit {
         }
       })
     }
+  }
+
+  loginGoogle(){
+    this.authGoogleService.login();
   }
 
 

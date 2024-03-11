@@ -91,7 +91,7 @@
                     <p class="social-text">Iniciar sesión con:</p>
 
                     <div class="social-media">
-                        <button class="btn_google">
+                        <button (click)="loginGoogle()" class="btn_google">
                             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
                                 viewBox="0 0 256 262">
                                 <path fill="#4285F4"
@@ -109,11 +109,12 @@
                             </svg>
                             Continuar con Google
                         </button>
+                        
                     </div>
                 </form>
 
                 <!--FORMULARIO DE REGISTRO-->
-                <form action="#" class="sign-up-form">
+                <form class="sign-up-form">
                     <h2 class="title">Registrate</h2>
 
                     <div class="input-field">
@@ -141,10 +142,10 @@
                         </svg>
                         <input type="password" placeholder="Contraseña" />
                     </div>
-                    <input type="submit" class="btn" value="Registrarse" />
+                    <button class="btn solid">Registrarse</button>
                     <p class="social-text">O registrate con:</p>
                     <div class="social-media">
-                        <button class="btn_google">
+                        <button (click)="loginGoogle()" class="btn_google">
                             <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
                                 viewBox="0 0 256 262">
                                 <path fill="#4285F4"
