@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   submitted = false;
+  loading: boolean = false;
 
   constructor(private fb : FormBuilder, private loginService : LoginService){}
 
@@ -50,8 +51,10 @@ export class LoginComponent implements OnInit {
         password: value.password
       };
 
+      this.loading = true;
       this.loginService.login(usuario).subscribe({
         next : (data) =>  {
+          this.loading = false;
           localStorage.setItem('token', data.token);
           Swal.fire({
             icon: 'success',
@@ -65,6 +68,7 @@ export class LoginComponent implements OnInit {
           });
         },
         error: (e: HttpErrorResponse) => {
+          this.loading = false;
           if (e.error.message){
             Swal.fire({
               icon: "error",
