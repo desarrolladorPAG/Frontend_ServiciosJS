@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angular/forms'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import { Usuario } from 'src/app/interfaces/usuario';
+import { LoginService } from 'src/app/servicios/login/login.service';
+import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +14,7 @@ import {FormBuilder, FormControl, FormGroup, Validator, Validators} from '@angul
 export class LoginComponent implements OnInit {
   submitted = false;
 
-  constructor(private fb : FormBuilder){}
+  constructor(private fb : FormBuilder, private loginService : LoginService){}
 
   ngOnInit(): void {
     
@@ -34,8 +40,50 @@ export class LoginComponent implements OnInit {
     password: this.fb.control('', [Validators.required])
   });
 
-  login(){
+  login(value: any){
     this.submitted = true;
+
+    if(this.form_login.valid){
+      //Body que se enviara al backned
+      const usuario: Usuario = {
+        correo: value.correo,
+        password: value.password
+      };
+
+      this.loginService.login(usuario).subscribe({
+        next : (data) =>  {
+          localStorage.setItem('token', data.token);
+          Swal.fire({
+            icon: 'success',
+            title: 'Inicio de sesión exitoso',
+            text: 'Bienvenido',
+            allowOutsideClick : false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              
+            }
+          });
+        },
+        error: (e: HttpErrorResponse) => {
+          if (e.error.message){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: e.error.message,
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Error inesperado",
+            });
+
+          }
+
+          
+        }
+      })
+    }
   }
 
 
