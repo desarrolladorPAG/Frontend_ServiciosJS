@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
       this.loginService.registrar_usuario(registrar_usuario).subscribe({
         next : (data) => {
           this.loading = false;
-          this.submitted = false;
+          this.submitted_register = false;
           Swal.fire({
             icon: 'success',
             title: 'Registro exitoso',
