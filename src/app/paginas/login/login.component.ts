@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/servicios/login/login.service';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthGoogleService } from 'src/app/servicios/auth-google/auth-google.service';
+import { catchError, throwError } from 'rxjs';
 
 
 @Component({
@@ -125,6 +126,7 @@ export class LoginComponent implements OnInit {
       this.loginService.registrar_usuario(registrar_usuario).subscribe({
         next : (data) => {
           this.loading = false;
+          this.submitted = false;
           Swal.fire({
             icon: 'success',
             title: 'Registro exitoso',
@@ -132,7 +134,6 @@ export class LoginComponent implements OnInit {
             allowOutsideClick : false
           }).then((result) => {
             if (result.isConfirmed) {
-              this.submitted = false
               this.form_register.reset()
             }
           });
@@ -159,6 +160,39 @@ export class LoginComponent implements OnInit {
 
     }
   }
+
+  reenviarLinkDeVerificacion() {
+    Swal.fire({
+      title: "Ingrese su correo electrónico",
+      input: "email",
+      inputAttributes: {
+        autocapitalize: "off"
+      },
+      showCancelButton: true,
+      confirmButtonText: "Reenviar link de verificación",
+      showLoaderOnConfirm: true,
+      preConfirm: (correo) => {
+        let user = {
+          correo : correo
+        }
+        return this.loginService.reenviarLinkDeVerificacion(user).pipe(
+          catchError(error => {
+            Swal.showValidationMessage(error.error.message);
+            return throwError(error);
+          })
+        ).toPromise();
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: result.value.message,
+          icon: 'success'
+        });
+      }
+    });
+  }
+  
 
 
   

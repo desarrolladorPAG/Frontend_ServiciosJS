@@ -25,4 +25,8 @@ export class LoginService {
     return this.http.post(`${this.url}registro`,registrar_usuario);
   }
 
+  reenviarLinkDeVerificacion(correo : any):Observable<any>{
+    return this.http.post(`${this.url}reenviar_link_verificacion`,correo);
+  }
+
 }
