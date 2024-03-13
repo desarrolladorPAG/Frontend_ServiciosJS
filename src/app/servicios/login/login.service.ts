@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from 'src/app/interfaces/usuario';
+import { Registrar_usuario, Usuario } from 'src/app/interfaces/usuario';
 import { Observable } from 'rxjs';
 import { AuthGoogleService } from '../auth-google/auth-google.service';
 
@@ -20,4 +20,9 @@ export class LoginService {
   loginGoogle(){
     this.authGoogleService.login();
   }
+
+  registrar_usuario(registrar_usuario : Registrar_usuario):Observable<any>{
+    return this.http.post(`${this.url}registro`,registrar_usuario);
+  }
+
 }

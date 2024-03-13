@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms'
-import { Usuario } from 'src/app/interfaces/usuario';
+import { Registrar_usuario, Usuario } from 'src/app/interfaces/usuario';
 import { LoginService } from 'src/app/servicios/login/login.service';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -111,8 +111,53 @@ export class LoginComponent implements OnInit {
     this.authGoogleService.login();
   }
 
-  registrarse(){
+  registrarse(value : any){
     this.submitted_register = true;
+
+    if(this.form_register.valid){
+      const registrar_usuario : Registrar_usuario = {
+        correo : value.correo,
+        nombre_completo : value.nombre_completo,
+        password : value.password
+      }
+      this.loading = true;
+
+      this.loginService.registrar_usuario(registrar_usuario).subscribe({
+        next : (data) => {
+          this.loading = false;
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: data.message,
+            allowOutsideClick : false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.submitted = false
+              this.form_register.reset()
+            }
+          });
+        },
+        error: (e: HttpErrorResponse) => {
+          this.loading = false;
+          if (e.error.message){
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: e.error.message,
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Error inesperado",
+            });
+
+          }
+        }
+
+      })
+
+    }
   }
 
 
