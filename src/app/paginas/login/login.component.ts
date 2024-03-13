@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms'
 import { Usuario } from 'src/app/interfaces/usuario';
 import { LoginService } from 'src/app/servicios/login/login.service';
 import Swal from 'sweetalert2';
@@ -14,6 +14,7 @@ import { AuthGoogleService } from 'src/app/servicios/auth-google/auth-google.ser
 })
 export class LoginComponent implements OnInit {
   submitted = false;
+  submitted_register = false;
   loading: boolean = false;
 
   constructor(private fb : FormBuilder, private loginService : LoginService, private authGoogleService : AuthGoogleService){}
@@ -41,6 +42,21 @@ export class LoginComponent implements OnInit {
     ]),
     password: this.fb.control('', [Validators.required])
   });
+
+  form_register : FormGroup = this.fb.group({
+    nombre_completo : this.fb.control('', [Validators.required]),
+    correo : this.fb.control('', [Validators.required, Validators.email
+    ]),
+    password: this.fb.control('', [Validators.required]),
+    confirmPassword : this.fb.control('', [Validators.required])
+  }, {
+    validators: this.passwordMatchValidator
+  });
+
+  //Funcion para validar de que las contraseñas sean iguales en los campos
+  passwordMatchValidator(control: AbstractControl){
+    return control.get('password')?.value === control.get('confirmPassword')?.value? null: {mismatch: true};
+  }
 
   login(value: any){
     this.submitted = true;
@@ -93,6 +109,10 @@ export class LoginComponent implements OnInit {
 
   loginGoogle(){
     this.authGoogleService.login();
+  }
+
+  registrarse(){
+    this.submitted_register = true;
   }
 
 

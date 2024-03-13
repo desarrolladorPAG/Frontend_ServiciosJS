@@ -21,7 +21,7 @@
                             <path fill="#a3a3a3"
                                 d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                         </svg>
-                        <input  formControlName="correo" type="email" placeholder="Usuario" />
+                        <input formControlName="correo" type="email" placeholder="Usuario" />
 
                     </div>
 
@@ -109,12 +109,12 @@
                             </svg>
                             Continuar con Google
                         </button>
-                        
+
                     </div>
                 </form>
 
                 <!--FORMULARIO DE REGISTRO-->
-                <form class="sign-up-form">
+                <form [formGroup]="form_register" class="sign-up-form">
                     <h2 class="title">Registrate</h2>
 
                     <div class="input-field">
@@ -123,8 +123,25 @@
                             <path fill="#a3a3a3"
                                 d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
                         </svg>
-                        <input type="text" placeholder="Nombre completo" />
+                        <input type="text" formControlName="nombre_completo" placeholder="Nombre completo" />
                     </div>
+
+                    <!--Mensaje de error-->
+                    <div *ngIf="form_register.get('nombre_completo')?.hasError('required') && (submitted_register)">
+                        <div class="error">
+                            <div class="error__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
+                                    fill="none">
+                                    <path fill="#393a37"
+                                        d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="error__title">El nombre es requerido</div>
+                        </div>
+                    </div>
+
+
 
                     <div class="input-field">
                         <svg class="svg_icon" xmlns="http://www.w3.org/2000/svg"
@@ -132,17 +149,90 @@
                             <path fill="#a3a3a3"
                                 d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
                         </svg>
-                        <input type="email" placeholder="Correo" />
+                        <input type="email" formControlName="correo" placeholder="Correo" />
                     </div>
+
+                    <!--Mensaje de error-->
+                    <div *ngIf="form_register.get('correo')?.hasError('required') && (submitted_register)">
+                        <div class="error">
+                            <div class="error__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
+                                    fill="none">
+                                    <path fill="#393a37"
+                                        d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="error__title">El correo es requerido</div>
+
+                        </div>
+                    </div>
+
+                    <!--Mensaje de error-->
+                    <div *ngIf="form_register.get('correo')?.hasError('email') && (submitted_register)">
+                        <div class="error">
+                            <div class="error__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
+                                    fill="none">
+                                    <path fill="#393a37"
+                                        d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="error__title">El correo es inválido</div>
+                        </div>
+                    </div>
+
                     <div class="input-field">
                         <svg class="svg_icon" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path fill="#a3a3a3"
                                 d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
                         </svg>
-                        <input type="password" placeholder="Contraseña" />
+                        <input type="password" formControlName="password" placeholder="Contraseña" />
                     </div>
-                    <button class="btn solid">Registrarse</button>
+
+                    <!--Mensaje de error-->
+                    <div *ngIf="form_register.get('password')?.hasError('required') && (submitted_register)">
+                        <div class="error">
+                            <div class="error__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
+                                    fill="none">
+                                    <path fill="#393a37"
+                                        d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="error__title">La contraseña es requerida</div>
+
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <svg class="svg_icon" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path fill="#a3a3a3"
+                                d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
+                        </svg>
+                        <input type="password" formControlName="confirmPassword" placeholder="Confirmar contraseña" />
+                    </div>
+
+                    <div *ngIf="form_register?.errors?.['mismatch'] && form_register?.touched">
+                        <div class="error">
+                            <div class="error__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24"
+                                    fill="none">
+                                    <path fill="#393a37"
+                                        d="m13 13h-2v-6h2zm0 4h-2v-2h2zm-1-15c-1.3132 0-2.61358.25866-3.82683.7612-1.21326.50255-2.31565 1.23915-3.24424 2.16773-1.87536 1.87537-2.92893 4.41891-2.92893 7.07107 0 2.6522 1.05357 5.1957 2.92893 7.0711.92859.9286 2.03098 1.6651 3.24424 2.1677 1.21325.5025 2.51363.7612 3.82683.7612 2.6522 0 5.1957-1.0536 7.0711-2.9289 1.8753-1.8754 2.9289-4.4189 2.9289-7.0711 0-1.3132-.2587-2.61358-.7612-3.82683-.5026-1.21326-1.2391-2.31565-2.1677-3.24424-.9286-.92858-2.031-1.66518-3.2443-2.16773-1.2132-.50254-2.5136-.7612-3.8268-.7612z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="error__title">Las contraseñas no coinciden</div>
+
+                        </div>
+                    </div>
+
+                    <button (click)="registrarse()" class="btn solid">Registrarse</button>
                     <p class="social-text">O registrate con:</p>
                     <div class="social-media">
                         <button (click)="loginGoogle()" class="btn_google">
