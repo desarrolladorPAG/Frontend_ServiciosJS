@@ -160,44 +160,5 @@ export class LoginComponent implements OnInit {
 
     }
   }
-
-  reenviarLinkDeVerificacion() {
-    Swal.fire({
-      title: "Ingrese su correo electrónico",
-      input: "email",
-      inputAttributes: {
-        autocapitalize: "off"
-      },
-      showCancelButton: true,
-      confirmButtonText: "Reenviar link de verificación",
-      showLoaderOnConfirm: true,
-      preConfirm: (correo) => {
-        let user = {
-          correo : correo
-        }
-        return this.loginService.reenviarLinkDeVerificacion(user).pipe(
-          catchError(error => {
-            Swal.showValidationMessage(error.error.message);
-            return throwError(error);
-          })
-        ).toPromise();
-      },
-      allowOutsideClick: () => !Swal.isLoading()
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: result.value.message,
-          icon: 'success'
-        });
-      }
-    });
-  }
-  
-
-
-  
-  
-
-
   
 }
