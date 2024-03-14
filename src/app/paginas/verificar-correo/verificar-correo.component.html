@@ -22,18 +22,17 @@
             </div>
     
             <p class="message">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ea quo unde
-                vel adipisci blanditiis voluptates eum. Nam, cum minima?
+                {{mensaje}}
             </p>
     
             <div class="actions">
-                <a class="read" href="">
+                <a class="read" [routerLink]="['/login']">
                     Iniciar sesión
                 </a>
     
-                <a class="mark-as-read" href="">
-                    Mark as Read
-                </a>
+                <button class="mark-as-read" (click)="reenviarLinkDeVerificacion()">
+                    Reenviar link de verificación
+                </button>
             </div>
         </div>
 

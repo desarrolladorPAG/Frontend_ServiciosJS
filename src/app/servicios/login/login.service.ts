@@ -29,4 +29,10 @@ export class LoginService {
     return this.http.post(`${this.url}reenviar_link_verificacion`,correo);
   }
 
+  verificarCorreo(token : any):Observable<any>{
+    return this.http.post(`${this.url}verificar/${token}`, null);
+  }
+
+  
+
 }

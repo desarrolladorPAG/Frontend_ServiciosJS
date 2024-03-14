@@ -19,7 +19,7 @@ const routes: Routes = [
     component : MainComponent
   },
   {
-    path: "verificar_correo",
+    path: "verificar_correo/:token",
     component: VerificarCorreoComponent
   }
 ];

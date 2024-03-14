@@ -79,6 +79,7 @@
     background-color: rgba(249, 250, 251, 1);
     color: rgba(107, 114, 128, 1);
     transition: all .15s ease;
+    border: none;
   }
   
   .mark-as-read:hover {
