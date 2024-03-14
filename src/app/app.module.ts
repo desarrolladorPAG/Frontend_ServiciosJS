@@ -9,13 +9,15 @@ import { HttpClientModule} from '@angular/common/http';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { MainComponent } from './paginas/main/main.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { VerificarCorreoComponent } from './paginas/verificar-correo/verificar-correo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SpinnerComponent,
-    MainComponent
+    MainComponent,
+    VerificarCorreoComponent
   ],
   imports: [
     BrowserModule,
