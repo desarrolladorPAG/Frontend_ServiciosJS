@@ -10,6 +10,7 @@ import { SpinnerComponent } from './componentes/spinner/spinner.component';
 import { MainComponent } from './paginas/main/main.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { VerificarCorreoComponent } from './paginas/verificar-correo/verificar-correo.component';
+import { NewPasswordComponent } from './paginas/new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { VerificarCorreoComponent } from './paginas/verificar-correo/verificar-c
     LoginComponent,
     SpinnerComponent,
     MainComponent,
-    VerificarCorreoComponent
+    VerificarCorreoComponent,
+    NewPasswordComponent
   ],
   imports: [
     BrowserModule,

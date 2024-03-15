@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Registrar_usuario, Usuario } from 'src/app/interfaces/usuario';
+import { New_password, Registrar_usuario, Usuario } from 'src/app/interfaces/usuario';
 import { Observable } from 'rxjs';
 import { AuthGoogleService } from '../auth-google/auth-google.service';
 
@@ -35,6 +35,10 @@ export class LoginService {
 
   recuperarPassword(correo : any):Observable<any>{
     return this.http.post(`${this.url}recuperar_password`,{correo : correo});
+  }
+
+  new_password(token : any, new_password : New_password):Observable<any>{
+    return this.http.post(`${this.url}new_password/${token}`, new_password);
   }
 
   

@@ -8,3 +8,8 @@ export interface Registrar_usuario{
     nombre_completo : string,
     password : string
 }
+
+export interface New_password{
+    password : string,
+    confirm_password : string
+}
