@@ -160,5 +160,41 @@ export class LoginComponent implements OnInit {
 
     }
   }
+
+  recuperarPassword(){
+    Swal.fire({
+      title: "Ingrese su correo electrónico",
+      input: "email",
+      inputAttributes: {
+        autocapitalize: "off"
+      },
+      showCancelButton: true,
+      confirmButtonText: "Enviar link de recuperación",
+      cancelButtonText: "Cancelar",
+      showLoaderOnConfirm: true,
+      preConfirm: (correo) => {
+
+        return this.loginService.recuperarPassword(correo).pipe(
+          catchError(error => {
+            if (error.error.message){
+              Swal.showValidationMessage(error.error.message);
+            } else {
+              Swal.showValidationMessage("Ha ocurrido un error inesperado, intente de nuevo");
+            }
+            return throwError(error.error.status);
+          })
+        ).toPromise();
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: result.value.message,
+          icon: 'success'
+        })
+      }
+    });
+
+  }
   
 }

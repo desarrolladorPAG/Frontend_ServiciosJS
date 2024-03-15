@@ -33,6 +33,10 @@ export class LoginService {
     return this.http.post(`${this.url}verificar/${token}`, null);
   }
 
+  recuperarPassword(correo : any):Observable<any>{
+    return this.http.post(`${this.url}recuperar_password`,{correo : correo});
+  }
+
   
 
 }
