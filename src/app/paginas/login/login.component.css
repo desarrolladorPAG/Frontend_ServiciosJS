@@ -452,3 +452,18 @@ form.sign-in-form {
   color: #fff;
 }
 
+.btn_recuperar_password{
+  border: none;
+  background-color: transparent;
+  transition: all .6s ease;
+  color: #575757;
+}
+
+.btn_recuperar_password:hover {
+  transform: scale(1.02);
+  
+}
+
+
+
+
