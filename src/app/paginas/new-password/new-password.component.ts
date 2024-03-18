@@ -59,7 +59,7 @@ export class NewPasswordComponent implements OnInit {
             if (result.isConfirmed) {
               this.router.navigate(['/login']);
             }
-          });;
+          });
         },
         error : (e: HttpErrorResponse) => {
           if (e.error.message){
